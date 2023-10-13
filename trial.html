@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
+    <script>
+        // Initialize Firebase with your project configuration
+        const firebaseConfig = {
+  apiKey: "AIzaSyAR9MtN6r38bUur3dRE7ogO_6bjA-SxzOs",
+  authDomain: "budget-tracker-8112c.firebaseapp.com",
+  projectId: "budget-tracker-8112c",
+  storageBucket: "budget-tracker-8112c.appspot.com",
+  messagingSenderId: "64314260842",
+  appId: "1:64314260842:web:91c6a4e9d83449e5de7913",
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        function signUp() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // Create a new user with email and password
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(function(userCredential) {
+                    // User registered successfully
+                    var user = userCredential.user;
+                    console.log("User registered with UID: " + user.uid);
+                    // Redirect to the next page after successful signup
+                    window.location.href = "first.html";
+                })
+                .catch(function(error) {
+                    // Handle registration errors
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.error("Registration failed: " + errorMessage);
+                });
+        }
+    </script>
+</head>
+<body>
+    <h2>Sign Up</h2>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password">
+    </div>
+    <button onclick="signUp()"><a href="first.html">Sign Up</a></button>
+</body>
+</html>
